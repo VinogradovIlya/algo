@@ -1,8 +1,9 @@
+import time
 import os
 from time import *
 
 
-def final_time(func):
+def count_sec(func):
     def wrapper(*args, **kwargs):
         start = time()
         res = func(*args, **kwargs)
@@ -10,16 +11,6 @@ def final_time(func):
         print(end - start)
         return res
     return wrapper
-
-
-@final_time
-def my_funk(a, b):
-    print(a + b)
-
-
-my_funk(10, 20)
-# import time
-
 
 # def timer(func):
 #     def wrapper(*args, **kwargs):
@@ -38,3 +29,21 @@ my_funk(10, 20)
 
 
 # some_function()
+
+@count_sec
+def create_string1():
+    res = ''
+    for i in range(1_000_000_00):
+        res += str(i)
+    return res
+
+
+@count_sec
+def create_string2():
+    res = ''.join(list(map(str, [i for i in range(1_000_000_00)])))
+    return res
+
+
+create_string1()
+
+create_string2()
