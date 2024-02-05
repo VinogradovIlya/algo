@@ -12,23 +12,6 @@ def count_sec(func):
         return res
     return wrapper
 
-# def timer(func):
-#     def wrapper(*args, **kwargs):
-#         start_time = time.time()
-#         result = func(*args, **kwargs)
-#         end_time = time.time()
-#         print(
-#             f"Время выполнения функции {func.__name__}: {end_time - start_time} сек.")
-#         return result
-#     return wrapper
-
-
-# @timer
-# def some_function():
-#     time.sleep(2)
-
-
-# some_function()
 
 @count_sec
 def create_string1():
@@ -43,7 +26,8 @@ def create_string2():
     res = ''.join(list(map(str, [i for i in range(1_000_000_00)])))
     return res
 
+if __name__ == '__main__':
+    create_string1()
 
-create_string1()
-
-create_string2()
+    create_string2()
+    print('deco.py')
