@@ -49,5 +49,6 @@ df['Price'] = df['Price'].apply(make_price)
 
 
 # Вычисли, сколько долларов разработчики заработали на каждом платном приложении
-df['Profit'] = df['Installs'] * df['Price']
+df['Profit'] = df[df['Installs'] != 0]['Installs'] * df['Price']
 print(df['Profit'])
+
