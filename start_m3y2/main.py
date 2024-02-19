@@ -31,6 +31,26 @@ def show_note() -> None:
     list_tags.addItems(notes[key]['tags'])
 
 
+def add_note():
+    note_name, ok = QInputDialog(
+        main_win, 'Добавить заметку', 'Название заметки')
+    if ok and note_name != '':
+        notes[note_name] = {'text': '', 'tags': []}
+        list_notes.addItem(note_name)
+        list_tags.addItems(notes[note_name]['tags'])
+
+def del_note():
+    if list_notes.selectedItems():
+        key = list_notes.selectedItems()[0].text()
+        del notes[key]
+        list_notes.clear()
+        list_tags.clear()
+        field_note.clear()
+        list_notes.addItems(notes)
+        with open('notes_data.json', 'w'):
+            ...
+    ...
+
 main_h_layout = QHBoxLayout()
 add_left_layout = QVBoxLayout()
 add_right_layout = QVBoxLayout()
