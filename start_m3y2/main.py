@@ -127,12 +127,12 @@ except FileNotFoundError:
             'tags': ['Умные заметки', 'Инструкция']
         }
     }
+    with open(DIR/'notes_data.json', 'w', encoding='utf-8') as file:
+        json.dump(notes, file, sort_keys=True, ensure_ascii=False, indent=4)
     with open("notes_data.json", "r", encoding='utf-8') as file:
         notes = json.load(file)
     list_notes.addItems(notes)
 
-    with open(DIR/'notes_data.json', 'w', encoding='utf-8') as file:
-        json.dump(notes, file, sort_keys=True, ensure_ascii=False, indent=4)
 
 
 main_win.show()
