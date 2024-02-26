@@ -62,6 +62,23 @@ def save_note():
         warning.exec()
 
 
+def add_tag():
+    if list_notes.selectedItems():
+        key = list_notes.selectedItems()[0].text()
+        tag = tag_line.text()
+        if not tag in notes[key]['tags']:
+            notes[key]['tags'].append(tag)
+            list_tags.addItem(tag)
+            tag_line.clear()
+        with open('notes_data.json', 'w') as file:
+            json.dump(notes, file, sort_keys=True, ensure_ascii=False)
+        done()
+    else:
+        warning = QMessageBox()
+        warning.setText('Выберите заметку для добавления тэга')
+        warning.exec()
+
+
 def done():
     done = QMessageBox()
     done.setText('Выполнено')
@@ -102,6 +119,7 @@ label_tags = QLabel('Список тегов')
 list_tags = QListWidget()
 add_h2_line = QHBoxLayout()
 button_create_tags = QPushButton('Добавить к заметке')
+button_create_tags.clicked.connect(add_tag)
 button_remove_tags = QPushButton('Открепить от заметки')
 tag_line = QLineEdit()
 tag_line.setPlaceholderText('Введите тег')
